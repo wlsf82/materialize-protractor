@@ -48,7 +48,7 @@ describe('Materialize - Forms', () => {
     });
 
     it('select some date in the future', () => {
-        // In the below date, January is equal to 0, February is 1, ..., December is 11
+        // In the below date, consider that January is equal to 0, February is 1, ..., December is 11
         const futureDate = '2018, 11, 25';
         const setDatescript = "var $input = $('.datepicker').pickadate();" +
             "var picker = $input.pickadate('picker');" +
@@ -65,7 +65,7 @@ describe('Materialize - Forms', () => {
     });
 
     it('select some date in the past', () => {
-        // In the below date, January is equal to 0, February is 1, ..., December is 11
+        // In the below date, consider that January is equal to 0, February is 1, ..., December is 11
         const pastDate = '1982, 3, 15';
         const setDatescript = "var $input = $('.datepicker').pickadate();" +
             "var picker = $input.pickadate('picker');" +
