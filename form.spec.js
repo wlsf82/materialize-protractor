@@ -50,10 +50,7 @@ describe('Materialize - Forms', () => {
     it('select some date in the future', () => {
         // In the below date, consider that January is equal to 0, February is 1, ..., December is 11
         const futureDate = '2018, 11, 25';
-        const setDatescript = "var $input = $('.datepicker').pickadate();" +
-            "var picker = $input.pickadate('picker');" +
-            "return picker.set('select', [" + futureDate +"]);";
-        browser.executeScript(setDatescript);
+        browser.executeScript(setDate(futureDate));
 
         expect(pickerDaySelected.isPresent()).toBe(true);
 
@@ -67,10 +64,7 @@ describe('Materialize - Forms', () => {
     it('select some date in the past', () => {
         // In the below date, consider that January is equal to 0, February is 1, ..., December is 11
         const pastDate = '1982, 3, 15';
-        const setDatescript = "var $input = $('.datepicker').pickadate();" +
-            "var picker = $input.pickadate('picker');" +
-            "return picker.set('select', [" + pastDate +"]);";
-        browser.executeScript(setDatescript);
+        browser.executeScript(setDate(pastDate));
 
         expect(pickerDaySelected.isPresent()).toBe(true);
 
@@ -84,4 +78,11 @@ describe('Materialize - Forms', () => {
 
 function sleepThreeSeconds() {
     browser.sleep(3000);
+}
+
+function setDate(date) {
+    const setDatescript = "var $input = $('.datepicker').pickadate();" +
+        "var picker = $input.pickadate('picker');" +
+        "return picker.set('select', [" + date +"]);";
+    return setDatescript;
 }
