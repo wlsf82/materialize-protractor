@@ -22,7 +22,7 @@ describe('Materialize - Forms', () => {
         expect(birthDatePickerFrame.isDisplayed()).toBe(true);
     });
 
-    it('pick today date and close date picker frame', () => {
+    it('pick today date and close date picker', () => {
         expect(birthDateField.getAttribute('aria-expanded')).toEqual('true');
 
         pickerTodayLink.click();
@@ -37,7 +37,7 @@ describe('Materialize - Forms', () => {
         expect(pickerDaySelected.isPresent()).toBe(true);
     });
 
-    it('clear birthdate field after picking today\'s date', () => {
+    it('clear birthdate field right after picking today\'s date', () => {
         pickerTodayLink.click();
         sleepThreeSeconds();
         pickerClearLink.click();

@@ -24,3 +24,5 @@ Then, to run the tests, run:
 ```
 npm test
 ```
+
+**Note: The sleep times in the spec file are used only for demonstration reasons.**
