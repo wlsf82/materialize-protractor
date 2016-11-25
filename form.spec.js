@@ -10,36 +10,38 @@ describe('Materialize - Forms', () => {
 
     beforeEach(() => {
         browser.get('');
-        sleepOneSeconds();
+        sleepThreeSeconds();
         birthDateField.click();
-        sleepOneSeconds();
+        sleepThreeSeconds();
+    });
+
+    afterEach(() => {
+        sleepThreeSeconds();
     });
     it('date picker is opened', () => {
         expect(birthDatePickerFrame.isDisplayed()).toBe(true);
-        sleepOneSeconds();
     });
 
     it('pick today date and close date picker frame', () => {
         expect(birthDateField.getAttribute('aria-expanded')).toEqual('true');
 
         pickerTodayLink.click();
-        sleepOneSeconds();
+        sleepThreeSeconds();
 
         expect(pickerDaySelected.isPresent()).toBe(true);
 
         pickerCloseLink.click();
-        sleepOneSeconds();
+        sleepThreeSeconds();
 
         expect(birthDateField.getAttribute('aria-expanded')).toEqual('false');
         expect(pickerDaySelected.isPresent()).toBe(true);
-        sleepOneSeconds();
     });
 
     it('clear birthdate field after picking today\'s date', () => {
         pickerTodayLink.click();
-        sleepOneSeconds();
+        sleepThreeSeconds();
         pickerClearLink.click();
-        sleepOneSeconds();
+        sleepThreeSeconds();
 
         expect(birthDateField.getAttribute('aria-expanded')).toEqual('false');
         expect(pickerDaySelected.isPresent()).not.toBe(true);
@@ -47,6 +49,6 @@ describe('Materialize - Forms', () => {
     });
 });
 
-function sleepOneSeconds() {
-    browser.sleep(1000);
+function sleepThreeSeconds() {
+    browser.sleep(3000);
 }
