@@ -45,7 +45,40 @@ describe('Materialize - Forms', () => {
 
         expect(birthDateField.getAttribute('aria-expanded')).toEqual('false');
         expect(pickerDaySelected.isPresent()).not.toBe(true);
-        sleepOneSeconds();
+    });
+
+    it('select some date in the future', () => {
+        // In the below date, January is equal to 0, February is 1, ..., December is 11
+        const futureDate = '2018, 11, 25';
+        const setDatescript = "var $input = $('.datepicker').pickadate();" +
+            "var picker = $input.pickadate('picker');" +
+            "return picker.set('select', [" + futureDate +"]);";
+        browser.executeScript(setDatescript);
+
+        expect(pickerDaySelected.isPresent()).toBe(true);
+
+        pickerCloseLink.click();
+        sleepThreeSeconds();
+
+        expect(birthDateField.getAttribute('aria-expanded')).toEqual('false');
+        expect(pickerDaySelected.isPresent()).toBe(true);
+    });
+
+    it('select some date in the past', () => {
+        // In the below date, January is equal to 0, February is 1, ..., December is 11
+        const pastdate = '1982, 3, 15';
+        const setDatescript = "var $input = $('.datepicker').pickadate();" +
+            "var picker = $input.pickadate('picker');" +
+            "return picker.set('select', [" + pastdate +"]);";
+        browser.executeScript(setDatescript);
+
+        expect(pickerDaySelected.isPresent()).toBe(true);
+
+        pickerCloseLink.click();
+        sleepThreeSeconds();
+
+        expect(birthDateField.getAttribute('aria-expanded')).toEqual('false');
+        expect(pickerDaySelected.isPresent()).toBe(true);
     });
 });
 
