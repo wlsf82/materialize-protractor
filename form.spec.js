@@ -49,7 +49,7 @@ describe('Materialize - Forms', () => {
 
     it('select some date in the future', () => {
         // In the below date, consider that January is equal to 0, February is 1, ..., December is 11
-        const futureDate = '2018, 11, 25';
+        const futureDate = '2033, 11, 25';
         browser.executeScript(setDate(futureDate));
 
         expect(pickerDaySelected.isPresent()).toBe(true);
