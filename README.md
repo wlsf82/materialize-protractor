@@ -1,5 +1,5 @@
 # materialize-protractor
-Sample project to create protractor tests in websites developed using materializecss.
+Sample project to demonstrate protractor tests created for websites developed using materializecss.
 
 To install the project dependencies, run:
 
