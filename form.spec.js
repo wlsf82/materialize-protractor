@@ -66,10 +66,10 @@ describe('Materialize - Forms', () => {
 
     it('select some date in the past', () => {
         // In the below date, January is equal to 0, February is 1, ..., December is 11
-        const pastdate = '1982, 3, 15';
+        const pastDate = '1982, 3, 15';
         const setDatescript = "var $input = $('.datepicker').pickadate();" +
             "var picker = $input.pickadate('picker');" +
-            "return picker.set('select', [" + pastdate +"]);";
+            "return picker.set('select', [" + pastDate +"]);";
         browser.executeScript(setDatescript);
 
         expect(pickerDaySelected.isPresent()).toBe(true);
