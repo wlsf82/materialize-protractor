@@ -18,6 +18,7 @@ describe('Materialize - Forms', () => {
     afterEach(() => {
         sleepThreeSeconds();
     });
+    
     it('date picker is opened', () => {
         expect(birthDatePickerFrame.isDisplayed()).toBe(true);
     });
