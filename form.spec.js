@@ -8,6 +8,21 @@ describe('Materialize - Forms', () => {
     const pickerCloseLink = element(by.css('.picker__close'));
     const pickerDaySelected = element(by.css('.picker__day--selected'));
 
+    const months = {
+        '0': 'January',
+        '1': 'February',
+        '2': 'March',
+        '3': 'April',
+        '4': 'May',
+        '5': 'June',
+        '6': 'July',
+        '7': 'August',
+        '8': 'September',
+        '9': 'October',
+        '10': 'November',
+        '11': 'December'
+    };
+
     beforeEach(() => {
         browser.get('');
         sleepThreeSeconds();
@@ -18,7 +33,7 @@ describe('Materialize - Forms', () => {
     afterEach(() => {
         sleepThreeSeconds();
     });
-    
+
     it('date picker is opened', () => {
         expect(birthDatePickerFrame.isDisplayed()).toBe(true);
     });
@@ -51,6 +66,12 @@ describe('Materialize - Forms', () => {
     it('select some date in the future', () => {
         // In the below date, consider that January is equal to 0, February is 1, ..., December is 11
         const futureDate = '2033, 11, 25';
+        const year = futureDate.substr(0, 4);
+        const monthAsNumber = futureDate.substr(6, 2);
+        const monthAsString = months[monthAsNumber];
+        const day = futureDate.substr(10, 2);
+        const dateNewFormat = day + ' ' + monthAsString + ', ' + year;
+        
         browser.executeScript(setDate(futureDate));
 
         expect(pickerDaySelected.isPresent()).toBe(true);
@@ -58,13 +79,22 @@ describe('Materialize - Forms', () => {
         pickerCloseLink.click();
         sleepThreeSeconds();
 
+        browser.executeScript(getDate()).then((date) => {
+            expect(date).toEqual(dateNewFormat);
+        });
+
         expect(birthDateField.getAttribute('aria-expanded')).toEqual('false');
-        expect(pickerDaySelected.isPresent()).toBe(true);
     });
 
     it('select some date in the past', () => {
         // In the below date, consider that January is equal to 0, February is 1, ..., December is 11
         const pastDate = '1982, 3, 15';
+        const year = pastDate.substr(0, 4);
+        const monthAsNumber = pastDate.substr(6, 1);
+        const monthAsString = months[monthAsNumber];
+        const day = pastDate.substr(9, 2);
+        const dateNewFormat = day + ' ' + monthAsString + ', ' + year;
+
         browser.executeScript(setDate(pastDate));
 
         expect(pickerDaySelected.isPresent()).toBe(true);
@@ -72,8 +102,11 @@ describe('Materialize - Forms', () => {
         pickerCloseLink.click();
         sleepThreeSeconds();
 
+        browser.executeScript(getDate()).then((date) => {
+            expect(date).toEqual(dateNewFormat);
+        });
+
         expect(birthDateField.getAttribute('aria-expanded')).toEqual('false');
-        expect(pickerDaySelected.isPresent()).toBe(true);
     });
 });
 
@@ -86,4 +119,11 @@ function setDate(date) {
         "var picker = $input.pickadate('picker');" +
         "return picker.set('select', [" + date +"]);";
     return setDatescript;
+}
+
+function getDate() {
+    const getDatescript = "var $input = $('.datepicker').pickadate();" +
+        "var picker = $input.pickadate('picker');" +
+        "return picker.get();";
+    return getDatescript;
 }
