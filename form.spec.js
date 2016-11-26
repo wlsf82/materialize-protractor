@@ -25,9 +25,9 @@ describe('Materialize - Forms', () => {
 
     beforeEach(() => {
         browser.get('');
-        sleepThreeSeconds();
+        sleepOneSecond();
         birthDateField.click();
-        sleepThreeSeconds();
+        sleepOneSecond();
     });
 
     it('date picker is opened', () => {
@@ -36,12 +36,12 @@ describe('Materialize - Forms', () => {
 
     it('pick today date and close date picker', () => {
         pickerTodayLink.click();
-        sleepThreeSeconds();
+        sleepOneSecond();
 
         expect(pickerDaySelected.isPresent()).toBe(true);
 
         pickerCloseLink.click();
-        sleepThreeSeconds();
+        sleepOneSecond();
 
         expect(birthDatePickerFrame.isDisplayed()).toBe(false);
         expect(pickerDaySelected.isPresent()).toBe(true);
@@ -49,10 +49,13 @@ describe('Materialize - Forms', () => {
 
     it('clear birthdate field right after picking today\'s date', () => {
         pickerTodayLink.click();
-        sleepThreeSeconds();
+        sleepOneSecond();
         pickerClearLink.click();
-        sleepThreeSeconds();
+        sleepOneSecond();
 
+        browser.executeScript(getDate()).then((date) => {
+            expect(date).toEqual('');
+        });
         expect(birthDatePickerFrame.isDisplayed()).toBe(false);
         expect(pickerDaySelected.isPresent()).not.toBe(true);
     });
@@ -67,11 +70,12 @@ describe('Materialize - Forms', () => {
         const dateNewFormat = day + ' ' + monthAsString + ', ' + year;
 
         browser.executeScript(setDate(futureDate));
+        sleepOneSecond();
 
         expect(pickerDaySelected.isPresent()).toBe(true);
 
         pickerCloseLink.click();
-        sleepThreeSeconds();
+        sleepOneSecond();
 
         browser.executeScript(getDate()).then((date) => {
             expect(date).toEqual(dateNewFormat);
@@ -88,11 +92,12 @@ describe('Materialize - Forms', () => {
         const dateNewFormat = day + ' ' + monthAsString + ', ' + year;
 
         browser.executeScript(setDate(pastDate));
+        sleepOneSecond();
 
         expect(pickerDaySelected.isPresent()).toBe(true);
 
         pickerCloseLink.click();
-        sleepThreeSeconds();
+        sleepOneSecond();
 
         browser.executeScript(getDate()).then((date) => {
             expect(date).toEqual(dateNewFormat);
@@ -100,8 +105,8 @@ describe('Materialize - Forms', () => {
     });
 });
 
-function sleepThreeSeconds() {
-    browser.sleep(3000);
+function sleepOneSecond() {
+    browser.sleep(1000);
 }
 
 function setDate(date) {
