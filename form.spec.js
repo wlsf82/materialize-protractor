@@ -30,11 +30,11 @@ describe('Materialize - Forms', () => {
         sleepOneSecond();
     });
 
-    it('date picker is opened', () => {
+    it('open date picker', () => {
         expect(birthDatePickerFrame.isDisplayed()).toBe(true);
     });
 
-    it('pick today date and close date picker', () => {
+    it('pick today\'s date and close date picker', () => {
         pickerTodayLink.click();
         sleepOneSecond();
 
