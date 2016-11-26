@@ -30,17 +30,11 @@ describe('Materialize - Forms', () => {
         sleepThreeSeconds();
     });
 
-    afterEach(() => {
-        sleepThreeSeconds();
-    });
-
     it('date picker is opened', () => {
         expect(birthDatePickerFrame.isDisplayed()).toBe(true);
     });
 
     it('pick today date and close date picker', () => {
-        expect(birthDateField.getAttribute('aria-expanded')).toEqual('true');
-
         pickerTodayLink.click();
         sleepThreeSeconds();
 
@@ -49,7 +43,7 @@ describe('Materialize - Forms', () => {
         pickerCloseLink.click();
         sleepThreeSeconds();
 
-        expect(birthDateField.getAttribute('aria-expanded')).toEqual('false');
+        expect(birthDatePickerFrame.isDisplayed()).toBe(false);
         expect(pickerDaySelected.isPresent()).toBe(true);
     });
 
@@ -59,7 +53,7 @@ describe('Materialize - Forms', () => {
         pickerClearLink.click();
         sleepThreeSeconds();
 
-        expect(birthDateField.getAttribute('aria-expanded')).toEqual('false');
+        expect(birthDatePickerFrame.isDisplayed()).toBe(false);
         expect(pickerDaySelected.isPresent()).not.toBe(true);
     });
 
@@ -71,7 +65,7 @@ describe('Materialize - Forms', () => {
         const monthAsString = months[monthAsNumber];
         const day = futureDate.substr(10, 2);
         const dateNewFormat = day + ' ' + monthAsString + ', ' + year;
-        
+
         browser.executeScript(setDate(futureDate));
 
         expect(pickerDaySelected.isPresent()).toBe(true);
@@ -82,8 +76,6 @@ describe('Materialize - Forms', () => {
         browser.executeScript(getDate()).then((date) => {
             expect(date).toEqual(dateNewFormat);
         });
-
-        expect(birthDateField.getAttribute('aria-expanded')).toEqual('false');
     });
 
     it('select some date in the past', () => {
@@ -105,8 +97,6 @@ describe('Materialize - Forms', () => {
         browser.executeScript(getDate()).then((date) => {
             expect(date).toEqual(dateNewFormat);
         });
-
-        expect(birthDateField.getAttribute('aria-expanded')).toEqual('false');
     });
 });
 
