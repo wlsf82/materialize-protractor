@@ -8,20 +8,12 @@ describe('Materialize - Forms', () => {
     const pickerCloseLink = element(by.css('.picker__close'));
     const pickerDaySelected = element(by.css('.picker__day--selected'));
 
-    const months = {
-        '0': 'January',
-        '1': 'February',
-        '2': 'March',
-        '3': 'April',
-        '4': 'May',
-        '5': 'June',
-        '6': 'July',
-        '7': 'August',
-        '8': 'September',
-        '9': 'October',
-        '10': 'November',
-        '11': 'December'
-    };
+    const months = [
+        'January', 'February', 'March',
+        'April', 'May', 'June',
+        'July', 'August', 'September',
+        'October', 'November', 'December'
+    ];
 
     beforeEach(() => {
         browser.get('');
