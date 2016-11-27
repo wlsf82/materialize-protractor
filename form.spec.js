@@ -2,7 +2,7 @@
 
 describe('Materialize - Forms', () => {
     const birthDateField = element(by.id('birthdate'));
-    const birthDatePickerFrame = element(by.css('#birthdate_root .picker__box'));
+    const datePickerBox = element(by.css('.picker__box'));
     const pickerTodayLink = element(by.css('.picker__today'));
     const pickerClearLink = element(by.css('.picker__clear'));
     const pickerCloseLink = element(by.css('.picker__close'));
@@ -31,7 +31,7 @@ describe('Materialize - Forms', () => {
     });
 
     it('open date picker', () => {
-        expect(birthDatePickerFrame.isDisplayed()).toBe(true);
+        expect(datePickerBox.isDisplayed()).toBe(true);
     });
 
     it('pick today\'s date and close date picker', () => {
@@ -43,8 +43,8 @@ describe('Materialize - Forms', () => {
         pickerCloseLink.click();
         sleepOneSecond();
 
-        expect(birthDatePickerFrame.isDisplayed()).toBe(false);
         expect(pickerDaySelected.isPresent()).toBe(true);
+        expect(datePickerBox.isDisplayed()).toBe(false);
     });
 
     it('clear birthdate field right after picking today\'s date', () => {
@@ -56,8 +56,8 @@ describe('Materialize - Forms', () => {
         browser.executeScript(getDate()).then((date) => {
             expect(date).toEqual('');
         });
-        expect(birthDatePickerFrame.isDisplayed()).toBe(false);
         expect(pickerDaySelected.isPresent()).not.toBe(true);
+        expect(datePickerBox.isDisplayed()).toBe(false);
     });
 
     it('select some date in the future', () => {
