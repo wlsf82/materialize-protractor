@@ -7,7 +7,13 @@ module.exports.config = {
     baseUrl: 'http://materializecss.com/forms.html',
     specs: ['*.spec.js'],
     capabilities: {
-        'browserName': 'chrome'
+        'browserName': 'chrome',
+        'chromeOptions': {
+            'args':
+            [
+                '--headless'
+            ]
+        }
     },
     onPrepare() {
         browser.ignoreSynchronization = true;
