@@ -2,7 +2,7 @@
   "name": "materialize-protractor",
   "version": "1.0.0",
   "scripts": {
-    "test": "./node_modules/.bin/protractor"
+    "test": "webdriver-manager update && protractor"
   },
   "keywords": [
     "protractor",

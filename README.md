@@ -13,12 +13,6 @@ or (for short):
 npm i
 ```
 
-To update `webdriver-manager`, run:
-
-```
-./node_modules/.bin/webdriver-manager update
-```
-
 Then, to run the tests, run:
 
 ```
