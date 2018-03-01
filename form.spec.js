@@ -2,6 +2,20 @@
 
 const helper = require('protractor-helper');
 
+function setDate(date) {
+    const setDatescript = "const $input = $('.datepicker').pickadate();" +
+        "const picker = $input.pickadate('picker');" +
+        "return picker.set('select', [" + date +"]);";
+    return setDatescript;
+}
+
+function getDate() {
+    const getDatescript = "const $input = $('.datepicker').pickadate();" +
+        "const picker = $input.pickadate('picker');" +
+        "return picker.get();";
+    return getDatescript;
+}
+
 describe('Materialize - Forms', () => {
     const birthDateField = element(by.id('birthdate'));
     const datePickerBox = element(by.css('.picker__box'));
@@ -82,17 +96,3 @@ describe('Materialize - Forms', () => {
         browser.executeScript(getDate()).then(date => expect(date).toEqual(dateNewFormat));
     });
 });
-
-function setDate(date) {
-    const setDatescript = "const $input = $('.datepicker').pickadate();" +
-        "const picker = $input.pickadate('picker');" +
-        "return picker.set('select', [" + date +"]);";
-    return setDatescript;
-}
-
-function getDate() {
-    const getDatescript = "const $input = $('.datepicker').pickadate();" +
-        "const picker = $input.pickadate('picker');" +
-        "return picker.get();";
-    return getDatescript;
-}
