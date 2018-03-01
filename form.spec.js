@@ -47,16 +47,12 @@ describe('Materialize - Forms', () => {
         helper.clickWhenClickable(pickerClearLink);
         pickerClearLink.click();
 
-        browser.executeScript(getDate()).then((date) => {
-            expect(date).toEqual('');
-        });
+        browser.executeScript(getDate()).then(date => expect(date).toEqual(''));
 
         helper.waitForElementNotToBePresent(pickerDaySelected);
 
         expect(pickerDaySelected.isPresent()).not.toBe(true);
-        browser.executeScript(getDate()).then((date) => {
-            expect(date).toEqual('');
-        });
+        browser.executeScript(getDate()).then(date => expect(date).toEqual(''));
     });
 
     it('select some date in the future', () => {
@@ -75,9 +71,7 @@ describe('Materialize - Forms', () => {
 
         helper.clickWhenClickable(pickerCloseLink);
 
-        browser.executeScript(getDate()).then((date) => {
-            expect(date).toEqual(dateNewFormat);
-        });
+        browser.executeScript(getDate()).then(date => expect(date).toEqual(dateNewFormat));
     });
 
     it('select some date in the past', () => {
@@ -96,9 +90,7 @@ describe('Materialize - Forms', () => {
 
         helper.clickWhenClickable(pickerCloseLink);
 
-        browser.executeScript(getDate()).then((date) => {
-            expect(date).toEqual(dateNewFormat);
-        });
+        browser.executeScript(getDate()).then(date => expect(date).toEqual(dateNewFormat));
     });
 });
 
