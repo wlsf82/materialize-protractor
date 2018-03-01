@@ -12,6 +12,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "jasmine-spec-reporter": "^2.7.0",
-    "protractor": "^5.1.2"
+    "protractor": "^5.1.2",
+    "protractor-helper": "^3.2.3"
   }
 }

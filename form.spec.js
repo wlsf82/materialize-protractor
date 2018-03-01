@@ -1,5 +1,7 @@
 'use strict';
 
+const helper = require('protractor-helper');
+
 describe('Materialize - Forms', () => {
     const birthDateField = element(by.id('birthdate'));
     const datePickerBox = element(by.css('.picker__box'));
@@ -17,37 +19,40 @@ describe('Materialize - Forms', () => {
 
     beforeEach(() => {
         browser.get('');
-        sleepOneSecond();
-        birthDateField.click();
-        sleepOneSecond();
+        helper.clickWhenClickable(birthDateField);
     });
 
     it('open date picker', () => {
+        helper.waitForElementVisibility(datePickerBox);
+
         expect(datePickerBox.isDisplayed()).toBe(true);
     });
 
     it('pick today\'s date and close date picker', () => {
-        pickerTodayLink.click();
-        sleepOneSecond();
+        helper.clickWhenClickable(pickerTodayLink);
+        helper.waitForElementPresence(pickerDaySelected);
 
         expect(pickerDaySelected.isPresent()).toBe(true);
 
-        pickerCloseLink.click();
-        sleepOneSecond();
+        helper.clickWhenClickable(pickerCloseLink);
+        helper.waitForElementPresence(pickerDaySelected);
+        helper.waitForElementNotToBeVisible(datePickerBox);
 
         expect(pickerDaySelected.isPresent()).toBe(true);
         expect(datePickerBox.isDisplayed()).toBe(false);
     });
 
     it('clear birthdate field right after picking today\'s date', () => {
-        pickerTodayLink.click();
-        sleepOneSecond();
+        helper.clickWhenClickable(pickerTodayLink);
+        helper.clickWhenClickable(pickerClearLink);
         pickerClearLink.click();
-        sleepOneSecond();
 
         browser.executeScript(getDate()).then((date) => {
             expect(date).toEqual('');
         });
+
+        helper.waitForElementNotToBePresent(pickerDaySelected);
+
         expect(pickerDaySelected.isPresent()).not.toBe(true);
         browser.executeScript(getDate()).then((date) => {
             expect(date).toEqual('');
@@ -64,12 +69,11 @@ describe('Materialize - Forms', () => {
         const dateNewFormat = day + ' ' + monthAsString + ', ' + year;
 
         browser.executeScript(setDate(futureDate));
-        sleepOneSecond();
+        helper.waitForElementPresence(pickerDaySelected);
 
         expect(pickerDaySelected.isPresent()).toBe(true);
 
-        pickerCloseLink.click();
-        sleepOneSecond();
+        helper.clickWhenClickable(pickerCloseLink);
 
         browser.executeScript(getDate()).then((date) => {
             expect(date).toEqual(dateNewFormat);
@@ -86,22 +90,17 @@ describe('Materialize - Forms', () => {
         const dateNewFormat = day + ' ' + monthAsString + ', ' + year;
 
         browser.executeScript(setDate(pastDate));
-        sleepOneSecond();
+        helper.waitForElementPresence(pickerDaySelected);
 
         expect(pickerDaySelected.isPresent()).toBe(true);
 
-        pickerCloseLink.click();
-        sleepOneSecond();
+        helper.clickWhenClickable(pickerCloseLink);
 
         browser.executeScript(getDate()).then((date) => {
             expect(date).toEqual(dateNewFormat);
         });
     });
 });
-
-function sleepOneSecond() {
-    browser.sleep(1000);
-}
 
 function setDate(date) {
     const setDatescript = "var $input = $('.datepicker').pickadate();" +
