@@ -103,15 +103,15 @@ describe('Materialize - Forms', () => {
 });
 
 function setDate(date) {
-    const setDatescript = "var $input = $('.datepicker').pickadate();" +
-        "var picker = $input.pickadate('picker');" +
+    const setDatescript = "const $input = $('.datepicker').pickadate();" +
+        "const picker = $input.pickadate('picker');" +
         "return picker.set('select', [" + date +"]);";
     return setDatescript;
 }
 
 function getDate() {
-    const getDatescript = "var $input = $('.datepicker').pickadate();" +
-        "var picker = $input.pickadate('picker');" +
+    const getDatescript = "const $input = $('.datepicker').pickadate();" +
+        "const picker = $input.pickadate('picker');" +
         "return picker.get();";
     return getDatescript;
 }
