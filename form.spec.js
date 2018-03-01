@@ -62,7 +62,7 @@ describe('Materialize - Forms', () => {
         const monthAsNumber = futureDate.substr(6, 2);
         const monthAsString = months[monthAsNumber];
         const day = futureDate.substr(10, 2);
-        const dateNewFormat = day + ' ' + monthAsString + ', ' + year;
+        const dateNewFormat = `${day} ${monthAsString}, ${year}`;
 
         browser.executeScript(setDate(futureDate));
         helper.waitForElementPresence(pickerDaySelected);
@@ -81,7 +81,7 @@ describe('Materialize - Forms', () => {
         const monthAsNumber = pastDate.substr(6, 1);
         const monthAsString = months[monthAsNumber];
         const day = pastDate.substr(9, 2);
-        const dateNewFormat = day + ' ' + monthAsString + ', ' + year;
+        const dateNewFormat = `${day} ${monthAsString}, ${year}`;
 
         browser.executeScript(setDate(pastDate));
         helper.waitForElementPresence(pickerDaySelected);
