@@ -24,34 +24,25 @@ describe('Materialize - Forms', () => {
 
     it('open date picker', () => {
         helper.waitForElementVisibility(datePickerBox);
-
-        expect(datePickerBox.isDisplayed()).toBe(true);
     });
 
     it('pick today\'s date and close date picker', () => {
         helper.clickWhenClickable(pickerTodayLink);
         helper.waitForElementPresence(pickerDaySelected);
 
-        expect(pickerDaySelected.isPresent()).toBe(true);
-
         helper.clickWhenClickable(pickerCloseLink);
+
         helper.waitForElementPresence(pickerDaySelected);
         helper.waitForElementNotToBeVisible(datePickerBox);
-
-        expect(pickerDaySelected.isPresent()).toBe(true);
-        expect(datePickerBox.isDisplayed()).toBe(false);
     });
 
     it('clear birthdate field right after picking today\'s date', () => {
         helper.clickWhenClickable(pickerTodayLink);
         helper.clickWhenClickable(pickerClearLink);
-        pickerClearLink.click();
 
         browser.executeScript(getDate()).then(date => expect(date).toEqual(''));
 
         helper.waitForElementNotToBePresent(pickerDaySelected);
-
-        expect(pickerDaySelected.isPresent()).not.toBe(true);
         browser.executeScript(getDate()).then(date => expect(date).toEqual(''));
     });
 
@@ -65,9 +56,8 @@ describe('Materialize - Forms', () => {
         const dateNewFormat = `${day} ${monthAsString}, ${year}`;
 
         browser.executeScript(setDate(futureDate));
-        helper.waitForElementPresence(pickerDaySelected);
 
-        expect(pickerDaySelected.isPresent()).toBe(true);
+        helper.waitForElementPresence(pickerDaySelected);
 
         helper.clickWhenClickable(pickerCloseLink);
 
@@ -84,9 +74,8 @@ describe('Materialize - Forms', () => {
         const dateNewFormat = `${day} ${monthAsString}, ${year}`;
 
         browser.executeScript(setDate(pastDate));
-        helper.waitForElementPresence(pickerDaySelected);
 
-        expect(pickerDaySelected.isPresent()).toBe(true);
+        helper.waitForElementPresence(pickerDaySelected);
 
         helper.clickWhenClickable(pickerCloseLink);
 
