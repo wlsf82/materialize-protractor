@@ -49,6 +49,9 @@ describe('Materialize - Forms', () => {
             expect(date).toEqual('');
         });
         expect(pickerDaySelected.isPresent()).not.toBe(true);
+        browser.executeScript(getDate()).then((date) => {
+            expect(date).toEqual('');
+        });
     });
 
     it('select some date in the future', () => {
