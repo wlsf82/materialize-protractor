@@ -1,4 +1,7 @@
 # materialize-protractor
+
+⚠️ **This project has been deprecated.** ⚠️
+
 Sample project to demonstrate protractor tests created for websites developed using materializecss.
 
 To install the project dependencies, run:
